@@ -1,0 +1,191 @@
+Private Sub Image3_Click() 'IMAGEM LOGOTIPO
+
+End Sub
+
+Private Sub Frame1_Click() ' FRAME DAS METRICAS DO PROJETO
+
+End Sub
+
+Private Sub Frame2_Click() ' FRAME DE METRICAS DO SPRINT
+
+End Sub
+
+Private Sub Image10_Click() ' ICONE DE BUG DE PRODUÇÃO
+
+End Sub
+
+Private Sub Image11_Click() ' ICONE TAREFAS DO SPRINT
+
+End Sub
+
+Private Sub Image12_Click() ' GRAFICO DE DISTRIBUIÇÃO DAS TAREFAS DO SPRINT
+
+End Sub
+
+Private Sub Image13_Click() ' GRAFICO DE TAREFAS DO SPRINT
+
+End Sub
+
+Private Sub Image14_Click() ' ICONE DA EFICIENCIA DA EQUIPE
+
+End Sub
+
+Private Sub Image16_Click() ' GRÁFICO BURNDOWN DO SPRINT
+
+End Sub
+
+Private Sub Image17_Click() ' GRAFICO DE ITENS DO BACKLOG
+
+End Sub
+
+Private Sub Image18_Click() ' ICONE DAS TARFAS DO PROJETO
+
+End Sub
+
+Private Sub Image19_Click() ' GRAFICO DE TAREFAS DO PROJETO
+
+End Sub
+
+Private Sub Image20_Click() ' GRAFICO DE PROGRESSO DO PROJETO
+
+End Sub
+
+Private Sub Image4_Click() ' GRAFICO BURNDOWN DO PROJETO
+
+End Sub
+
+Private Sub Image5_Click() ' ICONE DOS REQUISITOS
+
+End Sub
+
+Private Sub Image6_Click() ' GRAFICO DE EFICIENCIA DA EQUIPE
+
+End Sub
+
+Private Sub Image7_Click() ' ICONE DE BUGS DE DESENVOLVIMENTO
+
+End Sub
+
+Private Sub Label15_Click() ' LABEL QUANTIDADE DE BUGS DE DESENVOLVIMENTO
+
+End Sub
+
+Private Sub Label16_Click() ' LABEL DE TEMPO GASTO COM BUGS DE PRODUÇÃO
+
+End Sub
+
+Private Sub Label17_Click() ' CAMPO QTD DE BUGS DE DESENVOLVIMETO
+
+End Sub
+
+Private Sub Label18_Click() ' CAMPO TEMPO GASTO COM BUGS DE DESENVOLVIMENTO
+
+End Sub
+
+Private Sub Label19_Click() ' LABEL UNIDADE DE TEMPO HORAS BUG DE DESENVOLVIMENTO
+
+End Sub
+
+Private Sub Label2_Click() ' LABEL TERMINO PREVISTO
+
+End Sub
+
+Private Sub Label20_Click() ' CAMPO BUGS DE PRODUÇÃO
+
+End Sub
+
+Private Sub Label21_Click() 'LABEL QUANTIDADE DE BUS DE PRODUÇÃO
+
+End Sub
+
+Private Sub Label22_Click() ' LABEL TEMPO ABERTO DE BUGS DE PRODUÇÃO
+
+End Sub
+
+Private Sub Label23_Click() ' CAMPO TEMPO ABERTO DE BUGS DE PRODUÇÃO
+
+End Sub
+
+Private Sub Label24_Click() ' LABEL UNIDADE TEMPO HORAS BUGS DE PROCUÇÃO
+
+End Sub
+
+Private Sub Label25_Click() ' LABEL TAREFAS DO SPRINT
+
+End Sub
+
+Private Sub Label26_Click() ' LABEL EFECIENCIA DA EQUIPE
+
+End Sub
+
+Private Sub Label28_Click() ' LABEL DISTRIBUIÇÃO DAS TAREFAS
+
+End Sub
+
+Private Sub Label3_Click() ' LABEL DIAS RESTANTES
+
+End Sub
+
+Private Sub Label30_Click() ' CAMPO NR SPRINT
+
+End Sub
+
+Private Sub Label31_Click() ' LABEL SPRINT
+
+End Sub
+
+Private Sub Label32_Click() ' LABEL REQUISITOS
+
+End Sub
+
+Private Sub Label33_Click() ' LABEL TAREFAS
+
+End Sub
+
+Private Sub Label34_Click() ' LABEL PROGRESSO DO PROJETO
+
+End Sub
+
+Private Sub Label35_Click() 'LABEL BUGS DE PRODUÇÃO
+
+End Sub
+
+Private Sub Label36_Click() ' CAMPO PORCENTAGEM DE PROGRESSO DO PROJETO
+
+End Sub
+
+Private Sub Label37_Click() ' LABEL UNIDADE PORCENTAGEM
+
+End Sub
+
+Private Sub Label4_Click() ' LABEL PROJETO
+
+End Sub
+
+Private Sub Label5_Click() ' CAMPO NOME DO PROJETO
+
+End Sub
+
+Private Sub Label7_Click() ' CAMPO TERMINO PREVISTO
+
+End Sub
+
+Private Sub Label8_Click() ' CAMPO DIAS RESTANTES
+
+End Sub
+
+Private Sub MultiPage1_Change() ' GUIA DE INDICADORES
+
+End Sub
+
+' AO INICIAR INTERFACE CHAMA ATUALIZAÇÃO AUTOMÁTICA DO DASH BOARD
+Private Sub UserForm_Initialize()
+Application.Run "PlotarBurndown"
+'EXIBE BOTÕES DE MAXMIZAR E MINIMIZAR
+InitMaxMin Me.Caption
+End Sub
+AO FECHARINTERFACE PARA ATUALIZAÇÃO AUTOMÁTICA DO DASHBOARD
+Private Sub UserForm_Terminate()
+Application.Run "PararBurndown"
+End Sub
+
