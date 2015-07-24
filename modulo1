@@ -1,0 +1,172 @@
+Attribute VB_Name = "Módulo1"
+Option Explicit
+' PROTOTIPO DE FUNÇÕES DE BIBLIOTECA DE CONFIGURAÇÃO DE INTEFACE GRAFICA
+Public Declare Function FindWindowA& Lib "User32" (ByVal lpClassName$, ByVal lpWindowName$)
+Public Declare Function GetWindowLongA& Lib "User32" (ByVal hWnd&, ByVal nIndex&)
+Public Declare Function SetWindowLongA& Lib "User32" (ByVal hWnd&, ByVal nIndex&, ByVal dwNewLong&)
+ 
+' DECLARAÇÃO DE VARIAVEIS
+Public Const GWL_STYLE As Long = -16
+Public Const WS_MINIMIZEBOX = &H20000
+Public Const WS_MAXIMIZEBOX = &H10000
+Public Const WS_FULLSIZING = &H70000
+Public flag As Boolean
+
+
+' FUNÇÕES DE BIBLIOTECA GRAFICA PARA EXIBIR BOTOES MAXIMIZAR E MINIMIZAR
+Public Sub InitMaxMin(mCaption As String, Optional Max As Boolean = True, Optional Min As Boolean = True _
+        , Optional Sizing As Boolean = True)
+Dim hWnd As Long
+    hWnd = FindWindowA(vbNullString, mCaption)
+    If Min Then SetWindowLongA hWnd, GWL_STYLE, GetWindowLongA(hWnd, GWL_STYLE) Or WS_MINIMIZEBOX
+    If Max Then SetWindowLongA hWnd, GWL_STYLE, GetWindowLongA(hWnd, GWL_STYLE) Or WS_MAXIMIZEBOX
+    If Sizing Then SetWindowLongA hWnd, GWL_STYLE, GetWindowLongA(hWnd, GWL_STYLE) Or WS_FULLSIZING
+End Sub
+' FUNÇÃO DE ATUALIZAÇÃO DE CAMPOS E GRAFICOS DO DASCHBOARD
+Public Sub PlotarBurndown()
+If flag = False Then
+'DECLARAÇÃO DE VARIAVEIS QUE RECEBERAO A IMAGEM DO GRAFICO
+Dim CurrentChart As Object
+Dim CurrentChart2 As Object
+Dim CurrentChart3 As Object
+Dim CurrentChart4 As Object
+Dim CurrentChart5 As Object
+Dim CurrentChart6 As Object
+Dim CurrentChart7 As Object
+Dim CurrentChart8 As Object
+Dim nome As String ' ARMAZENA O PATH DA IMAGEM
+Dim tempoBugs As Double ' ARMAZENA O TEMPO DOS BUGS
+tempoBugs = SomaBugs() 'RECEBE RESULTADO DA FUNÇÃO SOMA DOS BUGS
+
+'SETA GRAFICO 1 DA PLANILHA SPRINT NA VARIAVEL
+Set CurrentChart = Sheets("Sprints").ChartObjects("burndownPjt").Chart
+'SETA DIMENSOES DA IMAGEM
+CurrentChart.Parent.Width = 476
+CurrentChart.Parent.Height = 222
+'SETA O NOME E LOCAL ONDE A FIGURA SERA ARMAZENADA
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp2.gif"
+'EXPORTA FIGURA PARA LOCAL DEFINIDO NA VARIAVEL NOME
+CurrentChart.Export Filename:=nome, filtername:="GIF"
+'SE DER ERRO NA OPERAÇÃO VAI PARA PROXIMA INSTRUÇÃO SENÃO CARREGA NA IMAGEM 4 A IMAGEM EXPORTADA
+On Error Resume Next
+Gerenciador_SCRUM.Image4.Picture = LoadPicture(nome)
+
+' SEGUE PADRÃO ACIMA DE OPERAÇÕES
+Set CurrentChart5 = Sheets("Atividades").ChartObjects("burndownSpt").Chart
+CurrentChart5.Parent.Width = 476
+CurrentChart5.Parent.Height = 200
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp6.gif"
+CurrentChart5.Export Filename:=nome, filtername:="GIF"
+On Error Resume Next
+Gerenciador_SCRUM.Image16.Picture = LoadPicture(nome)
+
+Set CurrentChart2 = Sheets("Atividades").ChartObjects("eficiencia").Chart
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp3.gif"
+CurrentChart2.Export Filename:=nome, filtername:="GIF"
+CurrentChart2.Parent.Width = 220
+CurrentChart2.Parent.Height = 55
+On Error Resume Next
+Gerenciador_SCRUM.Image6.Picture = LoadPicture(nome)
+
+Set CurrentChart3 = Sheets("Atividades").ChartObjects("distribuicao").Chart
+CurrentChart3.Parent.Width = 240
+CurrentChart3.Parent.Height = 84
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp4.gif"
+CurrentChart3.Export Filename:=nome, filtername:="GIF"
+On Error Resume Next
+Gerenciador_SCRUM.Image12.Picture = LoadPicture(nome)
+
+Set CurrentChart4 = Sheets("Atividades").ChartObjects("tarefas").Chart
+CurrentChart4.Parent.Width = 210
+CurrentChart4.Parent.Height = 100
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp5.gif"
+CurrentChart4.Export Filename:=nome, filtername:="GIF"
+On Error Resume Next
+Gerenciador_SCRUM.Image13.Picture = LoadPicture(nome)
+
+Set CurrentChart6 = Sheets("BackLogProduto").ChartObjects("requisitos").Chart
+CurrentChart6.Parent.Width = 210
+CurrentChart6.Parent.Height = 100
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp6.gif"
+CurrentChart6.Export Filename:=nome, filtername:="GIF"
+On Error Resume Next
+Gerenciador_SCRUM.Image17.Picture = LoadPicture(nome)
+
+Set CurrentChart7 = Sheets("Atividades").ChartObjects("tarefaspjt").Chart
+CurrentChart7.Parent.Width = 210
+CurrentChart7.Parent.Height = 100
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp7.gif"
+CurrentChart7.Export Filename:=nome, filtername:="GIF"
+On Error Resume Next
+Gerenciador_SCRUM.Image19.Picture = LoadPicture(nome)
+
+Set CurrentChart8 = Sheets("BackLogProduto").ChartObjects("andamentopjt").Chart
+CurrentChart8.Parent.Width = 91
+CurrentChart8.Parent.Height = 86
+nome = ThisWorkbook.Path & Application.PathSeparator & "imagens" & Application.PathSeparator & "temp8.gif"
+CurrentChart8.Export Filename:=nome, filtername:="GIF"
+On Error Resume Next
+Gerenciador_SCRUM.Image20.Picture = LoadPicture(nome)
+
+'ATUALIZAÇÃO DE CAMPOS E LABELS
+Gerenciador_SCRUM.Label5.Caption = Plan5.Cells(2, 2) 'SETA CAMPO PROJETO
+Gerenciador_SCRUM.Label7.Caption = Plan5.Cells(2, 4) ' SETA CAMPO TERMINO PROJETO
+Gerenciador_SCRUM.Label8.Caption = CInt(Plan5.Cells(2, 5))  ' SETA CAMPO DIAS RESTANTES
+Gerenciador_SCRUM.Label17.Caption = Plan6.Cells(Rows.Count, 2).End(xlUp).Row - 1 'CONTA E SETA QTD DE BUGS
+Gerenciador_SCRUM.Label18.Caption = HrStr(tempoBugs)
+Gerenciador_SCRUM.Label30.Caption = Plan2.Cells(2, 10)
+Gerenciador_SCRUM.Label20.Caption = Plan6.Cells(2, 9)
+Gerenciador_SCRUM.Label23.Caption = HrStr(Plan6.Cells(3, 9))
+Gerenciador_SCRUM.Label36.Caption = CInt(Plan1.Cells(7, 9) * 100)
+Call UpdateCinco(True) ' CHAMA FUNÇÃO DE ATUALIZAÇÃO DO DASHBORD
+Else:
+Call UpdateCinco(False)
+Exit Sub
+End If
+End Sub
+' FUNCÃO QUE CHAMA ATUALIZAÇÃO EM INTERVALOS DE 5 SEGUNDOS
+Public Sub UpdateCinco(executando As Boolean)
+Attribute UpdateCinco.VB_ProcData.VB_Invoke_Func = " \n14"
+If executando = True Then
+Dim Tempo As Date 'VARIAVEL DO TIPO DATA
+Tempo = Now + TimeValue("00:00:05") 'TEMPO RECEBE AGORA + INCREMENTO
+Application.OnTime Tempo, "PlotarBurndown" 'NO INTEVALO DE TEMPO CHAMA FUNÇÃO NOVAMENTE
+Else: Exit Sub
+End If
+End Sub
+
+Public Sub PararBurndown()
+flag = True
+Exit Sub
+End Sub
+' FUNÇÃO PARA CONTAGEM DE BUGS
+Public Function SomaBugs() As Double
+Dim i As Integer
+Dim Total As Double
+Dim LinhaFinal As Integer
+Total = 0
+LinhaFinal = Plan6.Cells(Rows.Count, 1).End(xlUp).Row
+For i = 2 To LinhaFinal
+Total = Total + CDbl(Plan6.Cells(i, 4))
+Next i
+SomaBugs = Total
+Plan3.Cells(9, 11).Value = Total
+End Function
+
+'FUNÇÃO PARA CONVERTER VALOR NUMÉRICO PARA HORAS E MINUTOS
+Public Function HrStr(dblHora As Double) As String
+'DECLARAÇÃO DE VARIAVEIS LOCAIS
+Dim strHoras As String
+Dim strMinutos As String
+'PARTE INTEIRA DAS HORAS
+strHoras = CStr(Fix(dblHora))
+'MINUTOS
+strMinutos = Format$(Abs((dblHora - Fix(dblHora)) * 60), "00")
+' SE O TOTAL FOR  60
+If strMinutos = "60" Then
+strMinutos = "00"
+strHoras = CStr(CDbl(strHoras) + 1)
+End If
+'CONCATENA AMBOS
+HrStr = strHoras & ":" & strMinutos
+End Function
