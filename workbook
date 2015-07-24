@@ -1,0 +1,9 @@
+Private Sub Workbook_BeforeClose(Cancel As Boolean)
+'Apblication.Visible = False ' OCULTA PLANILHA NÃO DESCOMENTAR
+
+End Sub
+ ' AO INCIAR PLANILHA EXIBE INTERFACE
+ Private Sub Workbook_Open()
+Application.Visible = True
+Gerenciador_SCRUM.Show
+ End Sub
